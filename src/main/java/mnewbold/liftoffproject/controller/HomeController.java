@@ -5,14 +5,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    @GetMapping("/logout")
-    public String getPage() {
-        return "logout";
+
+    @GetMapping(value={"", "/"})
+    public String getPage_Home() {
+        return "welcome";
+    }
+
+    @GetMapping("/login")
+    public String getPage_Login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String getPage_FillOut() {
+        return "register";
     }
 
     @GetMapping("/search")
-    public String getPage1() {
+    public String getPage_Search() {
         return "search";
+    }
+
+    @GetMapping("/logout")
+    public String getPage_Bye() {
+        return "logout";
     }
 
 }
