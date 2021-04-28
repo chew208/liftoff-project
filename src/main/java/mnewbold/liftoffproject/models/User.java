@@ -1,4 +1,4 @@
-package mnewbold.liftoffproject;
+package mnewbold.liftoffproject.models;
 
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,18 +21,19 @@ public class User {
     private String username;
 
     @NotNull
-    private String password;
-
-    @NotNull
     private String pwHash;
 
     public User() {}
 
-    public User(int id, @NotNull String username, @NotNull String password, @NotNull String pwHash) {
+    public User(@NotNull String username, @NotNull String pwHash) {
         this.id = id;
         this.username = username;
-        this.password = password;
         this.pwHash = pwHash;
+    }
+
+
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, pwHash);
     }
 
     public int getId() {

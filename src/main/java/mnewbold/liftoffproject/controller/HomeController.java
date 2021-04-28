@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping(value={"", "/"})
+    @GetMapping("/index")
     public String getPage_Home() {
-        return "welcome";
+        return "index";
     }
 
-    @GetMapping("/login")
+    /*%@GetMapping("/login")
     public String getPage_Login() {
         return "login";
     }
@@ -19,16 +19,16 @@ public class HomeController {
     @GetMapping("/register")
     public String getPage_FillOut() {
         return "register";
-    }
+    }*/
 
     @GetMapping("/search")
     public String getPage_Search() {
         return "search";
     }
 
-    @GetMapping("/logout")
+    /*@GetMapping("/logout")
     public String getPage_Bye() {
         return "logout";
-    }
+    }*/
 
 }
