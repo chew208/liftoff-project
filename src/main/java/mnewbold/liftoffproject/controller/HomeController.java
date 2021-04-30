@@ -10,8 +10,8 @@ public class HomeController {
     public String getPage_Home() {
         return "index";
     }
-
-    /*%@GetMapping("/login")
+    /*
+    @GetMapping("/login")
     public String getPage_Login() {
         return "login";
     }
@@ -19,8 +19,8 @@ public class HomeController {
     @GetMapping("/register")
     public String getPage_FillOut() {
         return "register";
-    }*/
-
+    }
+    */
     @GetMapping("/search")
     public String getPage_Search() {
         return "search";

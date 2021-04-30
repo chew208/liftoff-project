@@ -38,12 +38,11 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
                              HttpServletResponse response,
                              Object handler) throws IOException {
 
-        if(isWhitelisted(request.getRequestURI())) {
+        if (isWhitelisted(request.getRequestURI())) {
             return true;
         }
 
         HttpSession session = request.getSession();
-        //User user = authenticationController.getUserFromSession(session);
         User user = authenticationController.getUserFromSession(session);
 
         if (user != null) {
@@ -51,6 +50,25 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         }
 
         response.sendRedirect("/login");
+        return false;
+    }
+
+    private static boolean isWhitelisted1(String path) {
+        String pathSlash = path, pathRootSlash;
+        if (!path.endsWith("/")) pathSlash = path.concat("/");
+        for (String pathRoot : whitelist) {
+            pathRootSlash = pathRoot;
+            if (!pathRoot.endsWith("/"))
+                pathRootSlash = pathRoot.concat("/");
+            System.out.println("path: " + path + ", " + pathSlash + "\npathRoot: " + pathRoot + ", " + pathRootSlash);
+            if (path.equals(pathRoot) ||
+                    pathSlash.equals(pathRootSlash) ||
+                    (!pathRootSlash.equals("/") && (
+                            (!path.endsWith("/") && pathSlash.startsWith(pathRootSlash))))) {
+                System.out.println("whitelisted\n");
+                return true;
+            }
+        }
         return false;
     }
 }
