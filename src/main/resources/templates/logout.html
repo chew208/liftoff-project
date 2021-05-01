@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.tymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments.html :: head" th:insert="fragments.html :: delayedRedirect">
+  <title>Logout</title>
+  <script type="text/javascript">
+    function toHome() {
+      window.setDelay
+    }
+  </script>
 </head>
-<body>
+<body class="container">
+<header th:replace="fragments :: page-header"></header>
 <h1>Thank you for visiting!</h1>
 <h4>You have successfully logged out</h4>
 <h6>Have a fantastic day!</h6>

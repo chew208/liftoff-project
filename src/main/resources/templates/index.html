@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.tymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments.html :: head">
+  <title>Home</title>
 </head>
-<body>
-<h1>Welcome to NatureHab!</h1>
-<h2>Thank you for stopping by! We appreciate your enthusiasm for outdoor inhabitants!</h2>
+<body class="container">
+<header th:replace="fragments :: page-header"></header>
+<div class="container body-content">
+  <h2>Nature Hab</h2>
+  &copy; 2021 by Matthew Newbold, all rights reserved.<br /><br />
+  <h1 th:text="'Welcome, ' + ${user.username} + '!'"></h1>
+  <h2>Thank you for stopping by! We appreciate your enthusiasm for outdoor inhabitants!</h2>
+</div>
+<div>
+  <div th:if="${loggedin}">
+    <form th:action="@{/logout}" method="get">
+      <input type="submit" value="Sign Out"/>
+    </form>
+  </div>
+  <div th:if="${!loggedin}">
+    <div class="float-left">
+      <form th:action="@{/login}" method="post">
+        <input type="submit" value="Log in"/>
+      </form>
+    </div>
+    <div class="float-left">
+      &nbsp;or&nbsp;
+    </div>
+    <div class="float-left">
+      <form th:action="@{/register}" method="post">
+        <input type="submit" value="Register"/>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>

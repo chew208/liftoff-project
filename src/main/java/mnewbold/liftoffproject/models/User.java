@@ -23,12 +23,16 @@ public class User {
     @NotNull
     private String pwHash;
 
+    @NotNull
+    private String type;
+
     public User() {}
 
-    public User(@NotNull String username, @NotNull String pwHash) {
+    public User(@NotNull String username, @NotNull String pwHash, @NotNull String type) {
         this.id = id;
         this.username = username;
         this.pwHash = pwHash;
+        this.type = type;
     }
 
 
@@ -43,5 +47,10 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public String getType() { return type;}
+
+    public boolean isGuest() { return type == "guest"; }
+
 
 }

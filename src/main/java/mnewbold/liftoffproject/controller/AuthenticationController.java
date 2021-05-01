@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,20 @@ public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
 
+    public static User GuestUser() {
+        return new User("Guest", "", "guest");
+    }
+
+    private static void setupCommonAttributes(Model model, User user, String title) {
+        Boolean loggedin = (user != null && !user.isGuest());
+        model.addAttribute("loggedin", loggedin);
+        model.addAttribute("user", user);
+        model.addAttribute("title", title);
+    }
+
     @GetMapping("/")
-    public String getPage_Home() {
+    public String getPage_Home(HttpServletRequest request, Model model) {
+        setupCommonAttributes(model, getUserFromSession(request.getSession()), "Home");
         return "index";
     }
 
@@ -62,9 +75,12 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), "user");
+        System.out.println("Attempting to save user " + newUser.getUsername());
         userRepository.save(newUser);
+        System.out.println("User " + newUser.getUsername() + " saved to database, id: " + newUser.getId() + ".");
         setUserInSession(request.getSession(), newUser);
+        System.out.println("User " + newUser.getUsername() + " stored in session.");
 
         return "redirect:";
     }
@@ -114,7 +130,8 @@ public class AuthenticationController {
     public User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         if (userId == null) {
-            return null;
+//            return null;
+            return new User("Guest", "", "guest");
         }
 
         Optional<User> user = userRepository.findById(userId);
@@ -124,15 +141,22 @@ public class AuthenticationController {
         }
 
         return user.get();
+
     }
 
     private static void setUserInSession(HttpSession session, User user) {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @GetMapping("/logout")
+    @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/login";
+        return "logout";
     }
+
+    @GetMapping("/search")
+    public String getPage_Search() {
+        return "search";
+    }
+
 }
