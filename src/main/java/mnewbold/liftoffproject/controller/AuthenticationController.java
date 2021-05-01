@@ -22,8 +22,14 @@ public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
 
+    @GetMapping("/")
+    public String getPage_Home() {
+        return "index";
+    }
+
     @GetMapping("/register")
     public String displayRegistrationForm(Model model) {
+        System.out.println("inside displayRegistrationForm");
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
         return "register";
@@ -33,6 +39,7 @@ public class AuthenticationController {
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
+        System.out.println("inside processRegistrationForm");
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
@@ -64,6 +71,8 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String displayLoginForm(Model model) {
+        System.out.println("inside displayLoginForm");
+
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
         return "login";
