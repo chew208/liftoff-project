@@ -31,7 +31,7 @@ public class User {
     public User(@NotNull String username, @NotNull String pwHash, @NotNull String type) {
         this.id = id;
         this.username = username;
-        this.pwHash = pwHash;
+        this.pwHash = encoder.encode(pwHash);
         this.type = type;
     }
 
