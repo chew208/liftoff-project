@@ -7,7 +7,8 @@
 <h1>Add a bug!</h1>
 <body>
 <form>
-    <label
+    <label th:for="name">Name of bug</label>
+    <input type="text" th:field="${insect.bug_name}">
 </form>
 
 </body>
