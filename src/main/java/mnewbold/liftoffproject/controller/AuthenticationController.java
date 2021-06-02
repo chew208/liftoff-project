@@ -1,6 +1,8 @@
 package mnewbold.liftoffproject.controller;
 
 import mnewbold.liftoffproject.models.User;
+import mnewbold.liftoffproject.models.data.InsectRepository;
+import mnewbold.liftoffproject.models.data.PlantRepository;
 import mnewbold.liftoffproject.models.data.UserRepository;
 import mnewbold.liftoffproject.models.dto.LoginFormDTO;
 import mnewbold.liftoffproject.models.dto.RegisterFormDTO;
@@ -20,8 +22,13 @@ import java.util.Optional;
 
 @Controller
 public class AuthenticationController {
+
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    InsectRepository insectRepository;
+    @Autowired
+    PlantRepository plantRepository;
 
     public static User GuestUser() {
         return new User("Guest", "", "guest");
@@ -37,6 +44,8 @@ public class AuthenticationController {
     @GetMapping("/")
     public String getPage_Home(HttpServletRequest request, Model model) {
         setupCommonAttributes(model, getUserFromSession(request.getSession()), "Home");
+        model.addAttribute("bugs",insectRepository.findAll());
+        model.addAttribute("plants",plantRepository.findAll());
         return "index";
     }
 

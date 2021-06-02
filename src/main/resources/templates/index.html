@@ -32,6 +32,36 @@
       </form>
     </div>
   </div>
+  <br>
+  <br>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Bug</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr th:each="bug : ${bugs}">
+        <td th:text="${bug.bugname}"></td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <table>
+      <thead>
+      <tr>
+        <th>Plant</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="plant : ${plants}">
+        <td th:text="${plant.flowerName}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
 </html>

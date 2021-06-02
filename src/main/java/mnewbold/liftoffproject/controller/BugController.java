@@ -56,9 +56,9 @@ public class BugController {
         }
 
         Insect newBug = new Insect(addBugFormDTO.getBugName());
-        System.out.println("Attempting to save bug " + newBug.getBugName());
+        System.out.println("Attempting to save bug " + newBug.getBugname());
         insectRepository.save(newBug);
-        System.out.println("User " + newBug.getBugName() + " saved to database, id: " + newBug.getId() + ".");
+        System.out.println("User " + newBug.getBugname() + " saved to database, id: " + newBug.getId() + ".");
 
         return "redirect:";
     }
