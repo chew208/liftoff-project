@@ -43,6 +43,7 @@ public class AuthenticationController {
     @GetMapping("/")
     public String getPage_Home(HttpServletRequest request, Model model) {
         setupCommonAttributes(model, getUserFromSession(request.getSession()), "Home");
+        model.addAttribute("bug",insectRepository.findAll());
         return "index";
     }
 
