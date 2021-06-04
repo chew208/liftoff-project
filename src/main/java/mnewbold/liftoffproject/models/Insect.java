@@ -33,14 +33,14 @@ public class Insect {
         return id;
     }
 
-    public String getBugname() { //Java program outside of Insect.java: bugName; MYSQL: bugname
+    public String getBugName() { //Java program outside of Insect.java: bugName; MYSQL: bugname
         if (bugname == null) {
-           return "";
+            return "";
         } else
             return bugname;
     }
-    public void setBugname(String bugname) {
-        this.bugname = bugname;
+    public void setBugName(String bugName) {
+        this.bugname = bugName;
     }
 
     public List<Plant> getFlower() {
