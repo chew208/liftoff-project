@@ -45,8 +45,8 @@ public class AuthenticationController {
     @GetMapping("/")
     public String getPage_Home(HttpServletRequest request, Model model) {
         setupCommonAttributes(model, getUserFromSession(request.getSession()), "Home");
-        model.addAttribute("bug", insectRepository.findAll());
-        model.addAttribute("plannt", plantRepository.findAll());
+        model.addAttribute("bugs", insectRepository.findAll());
+        model.addAttribute("plants", plantRepository.findAll());
         return "index";
     }
 

@@ -42,6 +42,7 @@ public class Insect {
     public void setBugName(String bugName) {
         this.bugname = bugName;
     }
+    public String getBugname() { return this.bugname; }
 
     public List<Plant> getFlower() {
         return flower;
