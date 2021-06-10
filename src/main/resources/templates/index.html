@@ -31,20 +31,31 @@
         <input type="submit" value="Register"/>
       </form>
     </div>
-    <br>
-    <table>
-      <thead>
-      <tr>
-        <th>Bugs</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="bug : ${bugs}">
-        <td th:text=" ${insect.bugname}"></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
+<table>
+  <thead>
+    <tr>
+      <th>Bugs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="bug : ${bugs}">
+      <td th:text="${insect.bugname}"></td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+  <tr>
+    <th>Plants</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="plant : ${plants}">
+    <td th:text="${plant.flowerName}"></td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>

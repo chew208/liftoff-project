@@ -24,8 +24,10 @@ import java.util.Optional;
 public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     InsectRepository insectRepository;
+
     @Autowired
     PlantRepository plantRepository;
 
@@ -43,7 +45,8 @@ public class AuthenticationController {
     @GetMapping("/")
     public String getPage_Home(HttpServletRequest request, Model model) {
         setupCommonAttributes(model, getUserFromSession(request.getSession()), "Home");
-        model.addAttribute("bug",insectRepository.findAll());
+        model.addAttribute("bug", insectRepository.findAll());
+        model.addAttribute("plannt", plantRepository.findAll());
         return "index";
     }
 
